@@ -28,8 +28,15 @@ app.use((req, res, next) => {
             method: req.method,
             url: req.originalUrl,
             statusCode: req.statusCode,
-            duration: '${duration} ms'
+            duration: `${duration} ms`
         })
     })
     next()
 })
+
+//Response Envlope
+function successResponse(res, message, data, status = 200){
+    return res.status(status).json({
+        success: true, message, data, error: null,
+    })
+}
