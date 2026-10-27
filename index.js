@@ -113,13 +113,13 @@ app.post('/biodata', validateBody(biodataSchema), async(req, res)=>{
         (id, nama, nim, kelas)
         values
         ($1, $2, $3, $4)
-         RETURNING *`
+         RETURNING *`,
         [id ?? null, nama, nim, kelas]
         )
         return successResponse(res, 'Data berhasil ditambahkan', result.rows[0], 201)
 })
 
-app.put("biodata/:id",
+app.put("/biodata/:id",
     validateParams(idSchema),
     validateBody(biodataSchema
         .fork(["nama", "nim", "kelas"], (field) => field.required())
